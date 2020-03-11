@@ -2,6 +2,8 @@
 #March 11th, 2020 @ midnight
 
 import turtle
+import os
+#import winsound //for windows sound effect
 
 wn = turtle.Screen()
 
@@ -65,7 +67,6 @@ def paddleB_down():
 score_a = 0
 score_b = 0
 
-
 #Pen
 pen = turtle.Turtle()
 pen.speed(0)
@@ -83,7 +84,6 @@ wn.onkeypress(paddleB_up, "Up")
 wn.onkeypress(paddleB_down, "Down")
 
 #Main game loop
-
 while True:
     wn.update()
     #ball movement
@@ -94,9 +94,13 @@ while True:
     if ball.ycor() > 290:
         ball.sety(290)
         ball.dy *= -1
+        os.system("afplay bounce.wav&")
+        #os.system("afplay bounce.wav&") // for linux
+        #winsound.PlaySound("bounce.wav", winsound.SND_ASYNC) // for windows
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
+        os.system("afplay bounce.wav&")
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
@@ -115,6 +119,8 @@ while True:
     if ball.xcor() > 335 and ball.xcor() < 350 and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
         ball.setx(335)
         ball.dx *= -1
+        os.system("afplay bounce.wav&")
     if ball.xcor() < -335 and ball.xcor() > -350 and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
         ball.setx(-335)
         ball.dx *= -1
+        os.system("afplay bounce.wav&")
